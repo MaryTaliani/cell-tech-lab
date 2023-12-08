@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CellTechLab assistenza riparazione cellulari</title>
+    <link rel="stylesheet" href="style-index.css">
+    <style>
+        .en {
+            display: none;
+        }
+
+        .it {
+            display: block;
+        }
+
+        .en-btn {
+            display: none;
+        }
+
+        .it-btn {
+            display: inline-block;
+        }
+
+        .lang-btn {
+            background-color: rgb(230, 230, 230);
+            text-align: center;
+            padding: 5px 0px;
+
+        }
+
+        .lang-btn button {
+            background-color: rgb(255, 255, 255);
+            font-size: 10px;
+            border: none;
+            border-radius: 8px;
+            padding: 3px 10px;
+        }
+
+        .lang-btn button.active {
+            background-color: rgb(160, 160, 160);
+            color: white;
+        }
+
+        .lang-btn button:hover {
+            background-color: rgb(160, 160, 160);
+            color: white;
+            font-size: 10px;
+            border: none;
+            border-radius: 8px;
+            padding: 3px 10px;
+        }
+
+        /* Stile per il popup login*/
+        .popup {
+            display: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 20px 50px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+            border-radius: 10px;
+            width: 380px;
+        }
+
+        .popup .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 5px;
+            background: #222;
+            color: #ffffff;
+            text-align: center;
+            line-height: 15px;
+            border-radius: 15px;
+            border: none;
+        }
+
+        .popup .form h2 {
+            text-align: center;
+            color: #222;
+            margin: 10px 0px 20px;
+            font-size: 25px;
+
+        }
+
+        .popup .form .form-element {
+            margin: 15px 0px;
+
+        }
+
+        .popup .form .form-element label {
+            font-size: 14px;
+            color: #222;
+        }
+
+        .popup .form .form-element input[type="text"],
+        .popup .form .form-element input[type="password"] {
+            margin-top: 5px;
+            display: block;
+            width: 100%;
+            padding: 10px;
+            outline: none;
+            border: 1px solid #aaa;
+            border-radius: 5px;
+        }
+
+        .popup .form .form-element input[type="checkbox"] {
+            margin-right: 5px;
+
+        }
+
+        .popup .form .form-element button {
+            width: 100%;
+            height: 40px;
+            border: none;
+            outline: none;
+            font: size 16px;
+            background: #222;
+            color: #f5f5f5;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        .popup .form .form-element a {
+            display: block;
+            text-align: center;
+            font-size: 15px;
+            color: #1a79ca;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        /* Stile per il fondo scuro di sfondo quando se apre il login*/
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+
+        /* Media query per schermi più piccoli */
+        @media screen and (max-width: 768px) {
+            .popup {
+                width: 90%;
+            }
+
+            .popup .form h2 {
+                font-size: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <img src="assistenza-tecnica-riparazioni-cellulare.jpg">
+    </header>
+    <main>
+        <div class="container">
+            <div class="nav">
+                <div class="navbar">
+                    <a id="homeNav" href="#" style="color: black;">Home</a>
+                    <a id="prenotazioni" href="modulo-clienti.html" class="it">Prenotazioni</a>
+                    <a id="booking" href="modulo-clienti.html" class="en">Booking</a>
+                    <!-- Link che apre il popup login -->
+                    <a id="login" href="login.html" >Login</a>
+                </div>
+
+            </div>
+        </div>
+        <!--------Popup login --------->
+
+        <div class="lang-btn">
+            <button id="italianButton" onclick="changeLanguage('it')" class="active">Italiano</button>
+            <button id="englishButton" onclick="changeLanguage('en')">English</button>
+        </div>
+
+        <script>
+
+            var italian = true;
+            document.getElementById('italianButton').classList.add('active');
+            // Nasconde inizialmente le traduzioni in una delle lingue
+            document.querySelectorAll('.en').forEach(function (element) {
+                element.style.display = 'none';
+            });
+            
+
+            /* Controlla l'apertura e la chiusura di una finestra popup quando l'utente fa clic su il link Login
+             e su un elemento con la classe "close-btn" all'interno della finestra popup stessa.  */
+
+            // Array di utenti con nomi utente e password
+            const utenti = [
+                { username: "utente1", password: "password1" },
+                { username: "utente2", password: "password2" },
+                { username: "utente3", password: "password3" }
+            ];
+            // Funzione per il login
+            function effettuaLogin() {
+                const username = document.getElementById("username").value;
+                const password = document.getElementById("password").value;
+                // Verifica se le credenziali sono corrette
+                const utenteTrovato = utenti.find(utente => utente.username === username &&
+                    utente.password === password);
+                if (utenteTrovato) {
+                    // Credenziali corrette, effettua l'accesso
+
+                    /* Reindirizza a una pagina successiva dopo 2 secondi 
+                    Aggiungere la pagina "Presa in Carico dei Prodotti" 
+                    e togliere la pagina di esempio*/
+
+                    setTimeout(function () {
+                        window.location.href = 'PresaInCaricoProdotti.html';
+                    }, 2000);
+                } else {
+
+                    // Credenziali errate, mostra un messaggio di errore
+                    alert("Credenziali errate. Riprova.");
+                }
+            }
+
+            function changeLanguage(lang) {
+                var elementsEn = document.querySelectorAll(".en");
+                var elementsIt = document.querySelectorAll(".it");
+                var buttonsEn = document.querySelectorAll(".en-btn");
+                var buttonsIt = document.querySelectorAll(".it-btn");
+
+
+                if (lang === 'en') {
+                    italian = false;
+                    elementsEn.forEach(function (el) {
+                        el.style.display = "block";
+                    });
+                    elementsIt.forEach(function (el) {
+                        el.style.display = "none";
+                    });
+                    buttonsEn.forEach(function (el) {
+                        el.style.display = "inline-block";
+                    });
+                    buttonsIt.forEach(function (el) {
+                        el.style.display = "none";
+                    });
+
+                    document.getElementById('italianButton').classList.remove('active');
+                    document.getElementById('englishButton').classList.add('active');
+
+                } else {
+                    italian = true;
+                    elementsEn.forEach(function (el) {
+                        el.style.display = "none";
+                    });
+                    elementsIt.forEach(function (el) {
+                        el.style.display = "block";
+                    });
+                    buttonsEn.forEach(function (el) {
+                        el.style.display = "none";
+                    });
+                    buttonsIt.forEach(function (el) {
+                        el.style.display = "inline-block";
+                    });
+                    document.getElementById('italianButton').classList.add('active');
+                    document.getElementById('englishButton').classList.remove('active');
+                }
+            }
+
+            //LANGUAGE CHOICE TRANSMISSION
+             //here the preferred language is retrieved from the page, and on clickong on a link in nav bar it is passed to that particular page
+            // Update these event listeners
+
+            function navigateToPage(page) {
+                const codedSelectedLang = encodeURIComponent(italian ? 'it' : 'en');
+                const urlDestination = page + "?testo=" + codedSelectedLang;
+                window.location.href = urlDestination;
+            }
+            document.getElementById('login').addEventListener('click', function () {
+                navigateToPage("login.html");
+                event.preventDefault();
+            });
+            document.getElementById('prenotazioni').addEventListener('click', function () {
+                navigateToPage("modulo-clienti.html");
+                event.preventDefault();
+            });
+            document.getElementById('booking').addEventListener('click', function () {
+                navigateToPage("modulo-clienti.html");
+                event.preventDefault();
+            });
+
+            //receiving the preferred language from another page and decodifying it, then adapting the language buttons so that the button corresponding to the preferred language will appear active
+            // Function to retrieve language parameter from the URL
+            function getLanguageFromURL() {
+                const params = new URLSearchParams(window.location.search);
+                return params.get("testo");
+            }
+
+            // Function to set the active state for language buttons
+            function setActiveLanguage() {
+                const language = getLanguageFromURL();
+
+                if (language === 'en') {
+                    document.getElementById('italianButton').classList.remove('active');
+                    document.getElementById('englishButton').classList.add('active');
+                    italian = false;
+                    changeLanguage('en');
+                } else {
+                    document.getElementById('italianButton').classList.add('active');
+                    document.getElementById('englishButton').classList.remove('active');
+                    italian = true;
+                    changeLanguage('it');
+                }
+            }
+            // Call the function when the page loads
+            document.addEventListener('DOMContentLoaded', function () {
+                setActiveLanguage();
+            });
+
+        </script>
+
+        <div class="choose-us">
+
+            <div class="choose-us-text">
+
+                <h2 style="margin-top:-50px; " class="en">Why choose us:</h2>
+                <h2 style="margin-top:-50px; " class="it">Perché scegliere noi:</h2>
+                <strong class="en">Expertise You Can Trust</strong>
+                <strong class="it">Esperti di cui vi potete fidare</strong>
+
+                <p class="en">With years of experience in the industry, our skilled technicians have mastered the art of
+                    cellphone repairs. We stay updated on the latest technologies to provide you with cutting-edge
+                    solutions.</p>
+                <p class="it">Con anni di esperienza nel settore, i nostri tecnici qualificati hanno imparato l'arte
+                    della riparazione di cellulare. Rimaniamo aggiornati sulle ultime tecnologie per fornirvi soluzionii
+                    all'avanguardia.</p>
+
+                <strong class="en">Turnaround</strong>
+                <strong class="it">Tempi di consegna</strong>
+                <p class="en">We understand the importance of your cellphone in your daily life. Our efficient repair
+                    processes ensure that you get your device back in your hands as quickly as possible without
+                    compromising on quality.
+                </p>
+                <p class="it">Comprendiamo l'importanza del tuo cellulare nella tua vita quotidiana. I nostri efficienti
+                    processi di riparazione ti garantiscono di riavere il tuo dispositivo nelle tue mani il più
+                    rapidamente possibile senza compromettere la qualità.
+                </p>
+                <strong class="en">Quality Parts, Guaranteed</strong>
+                <strong class="it">Ricambi di Qualità, Garantiti</strong>
+                <p class="en">We use only top-quality, genuine parts in our repairs. Our commitment to quality ensures
+                    that your cellphone functions optimally after every repair, giving you peace of mind.</p>
+                <p class="it">Per le nostre riparazioni utilizziamo solo ricambi originali e di alta qualità. Il nostro
+                    impegno per la qualità garantisce che il tuo il cellulare funziona in modo ottimale dopo ogni
+                    riparazione, garantendoti la massima tranquillità.</p>
+
+                <strong class="en">Transparent Pricing</strong>
+                <strong class="it">Prezzi Trasparenti</strong>
+                <p class="en">No hidden fees or surprises! Our pricing is transparent, and we provide detailed estimates
+                    before starting any repair. You'll know exactly what to expect, with no unexpected costs.</p>
+                <p class="it">Nessun costo non dichiarato o sorpresa! I nostri prezzi sono trasparenti e forniamo
+                    preventivi dettagliati prima di iniziare qualsiasi riparazione. Saprai esattamente cosa aspettarti,
+                    senza costi imprevisti.</p>
+            </div>
+            <div class="choose-us-image">
+                <img src="cellphone-diagnose-repair.webp" alt="" width="280px">
+            </div>
+        </div>
+        <div class="booking">
+            <a class="home-black-btn en-btn" href="modulo-clienti.html">Book a service</a>
+            <a class="home-black-btn it-btn" href="modulo-clienti.html">Prenota un servizio</a>
+        </div>
+        <div class="story">
+            <p id="story" class="en">Established in 2010, Cell Tech Lab has been a trusted name in the cellphone repair
+                industry.
+                Our journey began with a passion for technology and a commitment to providing reliable, high-quality
+                repair services. Over the years, we have grown into a reputable repair center known for our expertise,
+                transparency, and dedication to customer satisfaction.</p>
+            <p id="story" class="it">Fondato nel 2010, Cell Tech Lab è un nome di fiducia nel settore della riparazione
+                di cellulari. Il nostro viaggio è iniziato con la passione per la tecnologia e l'impegno a fornire
+                prodotti e servizi di riparazione affidabili e di alta qualità. Nel corso degli anni, siamo cresciuti
+                fino a diventare un noto centro di riparazione, conosciuto per la nostra competenza,
+                trasparenza e dedizione alla soddisfazione del cliente.</p>
+        </div>
+        <div class="services-parallax">
+            <div class="services">
+                <h2 class="en">Some of the services we offer:</h2>
+                <h2 class="it">Some of the services we offer:</h2>
+                <div>
+                    <p class="en">Battery Replacement</p>
+                    <p class="it">Sostituzione della batteria</p>
+                    <p class="en">Water Damage Repair</p>
+                    <p class="it">Riparazione dei danni causati dall'acqua</p>
+                    <p class="en">Diagnostic Services</p>
+                    <p class="it">Servizi diagnostici</p>
+                    <p class="en">Charging Port Repair</p>
+                    <p class="it">Riparazione della porta di ricarica</p>
+                    <p class="en">Camera and Speaker Repairs</p>
+                    <p class="it">Riparazioni fotocamere e altoparlanti</p>
+                    <p class="en">Data Recovery</p>
+                    <p class="it">Recupero dati</p>
+                    <p class="en">Custom Repairs</p>
+                    <p class="it">Riparazioni personalizzate</p>
+                </div>
+                <div class="booking2">
+                    <a class="en-btn home-black-btn" href="modulo-clienti.html">Book a service</a>
+                    <a class="it-btn home-black-btn" href="modulo-clienti.html">Prenota un servizio</a>
+                </div>
+            </div>
+        </div>
+        <div class="customer-service">
+            <p class="en">Your satisfaction is our ultimate goal. We prioritize your needs, offering quick turnaround
+                times,
+                reliable repairs, and exceptional customer service to create a positive experience.</p>
+            <p class="it">La vostra soddisfazione è il nostro obiettivo finale. Diamo priorità alle vostre esigenze,
+                offrendo tempi di consegna rapidi, riparazioni affidabili e un servizio clienti eccezionale per creare
+                un'esperienza positiva.</p>
+        </div>
+    </main>
+    <footer>
+        <div class="footers-container">
+            <div class="footers">
+                <div class="svg-icon">
+                    <svg style="color: white" xmlns="http://www.w3.org/2000/svg" width="26" height="26"
+                        fill="currentColor" class="bi bi-facebook" viewBox="0 0 16 16">
+                        <path
+                            d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951z"
+                            fill="white"></path>
+                    </svg>
+                </div>
+                <div class="icons-text">
+                    <a href="#">facebook</a>
+                    <p>CellTechLab</p>
+                </div>
+
+            </div>
+            <div class="footers">
+                <div class="svg-icon">
+                    <svg style="color: white" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                        fill="currentColor" class="bi bi-instagram" viewBox="0 0 16 16">
+                        <path
+                            d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.917 3.917 0 0 0-1.417.923A3.927 3.927 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.916 3.916 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.926 3.926 0 0 0-.923-1.417A3.911 3.911 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0h.003zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599.28.28.453.546.598.92.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.47 2.47 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.478 2.478 0 0 1-.92-.598 2.48 2.48 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233 0-2.136.008-2.388.046-3.231.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92.28-.28.546-.453.92-.598.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045v.002zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92zm-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217zm0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334z"
+                            fill="white"></path>
+                    </svg>
+                </div>
+                <div class="icons-text">
+                    <a href="#">Instagram</a>
+                    <p>Cell_Tech_Lab</p>
+                </div>
+            </div>
+            <div class="footers">
+                <div class="svg-icon">
+                    <svg style="color: white" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                        fill="currentColor" class="bi bi-whatsapp" viewBox="0 0 16 16">
+                        <path
+                            d="M13.601 2.326A7.854 7.854 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.933 7.933 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.898 7.898 0 0 0 13.6 2.326zM7.994 14.521a6.573 6.573 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.557 6.557 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592zm3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.729.729 0 0 0-.529.247c-.182.198-.691.677-.691 1.654 0 .977.71 1.916.81 2.049.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232z"
+                            fill="white"></path>
+                    </svg>
+                </div>
+                <div class="icons-text">
+                    <a href="#">WhatsApp</a>
+                    <p>333 444555</p>
+                </div>
+            </div>
+            <div class="footers">
+                <div class="svg-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="24" width="24" fill="white" stroke="white"
+                        viewBox="0 0 512 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2023 Fonticons, Inc.-->
+                        <path
+                            d="M64 112c-8.8 0-16 7.2-16 16v22.1L220.5 291.7c20.7 17 50.4 17 71.1 0L464 150.1V128c0-8.8-7.2-16-16-16H64zM48 212.2V384c0 8.8 7.2 16 16 16H448c8.8 0 16-7.2 16-16V212.2L322 328.8c-38.4 31.5-93.7 31.5-132 0L48 212.2zM0 128C0 92.7 28.7 64 64 64H448c35.3 0 64 28.7 64 64V384c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V128z" />
+                    </svg>
+                </div>
+                <div class="icons-text">
+                    <a href="#">Email</a>
+                    <p>info@celltechlab.com</p>
+                </div>
+            </div>
+            <div class="footers">
+                <div class="svg-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="feather feather-map-pin">
+                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                        <circle cx="12" cy="10" r="3"></circle>
+                    </svg>
+                </div>
+                <div class="icons-text">
+                    <a href="#">Address</a>
+                    <p>Città Bella, Via degli </p>
+                    <p style="margin-top: -6px;">Sviluppatori, N°1</p>
+                </div>
+            </div>
+
+        </div>
+    </footer>
+    <div class="lastPart">
+        <p>Cell Tech Lab Copyright 2023 All Rights Reserved - Privacy Policy </p>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style-index.css">
+    <title>Thank you</title>
+    <style>
+        .en {
+            display: none;
+        }
+
+        .it {
+            display: block;
+        }
+
+        .lang-btn {
+            background-color: rgb(230, 230, 230);
+            text-align: center;
+            padding: 5px 0px;
+
+        }
+
+        .lang-btn button {
+            background-color: rgb(255, 255, 255);
+            color: black;
+            font-size: 10px;
+            border: none;
+            border-radius: 8px;
+            padding: 3px 10px;
+        }
+
+        .lang-btn button.active {
+            background-color: rgb(160, 160, 160);
+            color: white;
+        }
+
+        .lang-btn button:hover {
+            background-color: rgb(160, 160, 160);
+            color: white;
+            font-size: 10px;
+            border: none;
+            border-radius: 8px;
+            padding: 3px 10px;
+        }
+
+        .thanks {
+            text-align: center;
+            padding: 4%;
+            background-color: #284968;
+            color: white;
+            margin: 5% auto;
+            border-radius: 20px;
+            width: 50%;
+        }
+
+        main {
+            padding-bottom: 40px;
+        }
+
+        h2 {
+            font-size: 4vw;
+        }
+
+        .thanksImg img {
+            width: 70%;
+        }
+
+        .description {
+            font-size: 14px;
+            padding-bottom: 15px;
+        }
+
+        .user-profile {
+            width: 50%;
+            border-radius: 20px;
+            color: #284968;
+            margin: 20px auto;
+            padding: 20px 30px;
+            box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        @media screen and (max-width:499px) {
+            .thanks {
+                width: 75%;
+            }
+
+            .description {
+                font-size: 12px;
+                padding-bottom: 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <img src="assistenza-tecnica-riparazioni-cellulare.jpg">
+    </header>
+    <main>
+        <div class="container">
+            <div class="nav">
+                <div class="navbar">
+                    <a id="homeNav" href="index.html">Home</a>
+                    <a id="booking" href="modulo-clienti.html" class="en">Booking</a>
+                    <a id="prenotazioni" href="modulo-clienti.html" class="it">Prenotazioni</a>
+                </div>
+            </div>
+        </div>
+        <div class="lang-btn">
+            <button id="italianButton" onclick="changeLanguage('it')" class="active">Italiano</button>
+            <button id="englishButton" onclick="changeLanguage('en')">English</button>
+        </div>
+        <div class="thanks">
+            <h2 class="en">Thank you!</h2>
+            <h2 class="it">Grazie!</h2>
+            <h3 class="en">You have submited the form. </h3>
+            <h3 class="it">Ci hai mandato il modulo. </h3>
+            <p class="description, en">Our operators work hard to take care of your request and will contact you within
+                24
+                hours!</p>
+            <p class="description, it">I nostri operatori lavorano duramente per prendersi cura della tua richiesta e ti
+                contatteranno entro 24 ore
+                ore!</p>
+
+            <div class="thanksImg">
+                <img src="assistenza-riparazioni-cellulare.webp">
+            </div>
+        </div>
+        <div class="user-profile">
+            <p class="it"><strong>Profilo dell'utente:</strong></p>
+            <p class="en"><strong>User profile:</strong></p>
+            <p id="user-profile"></p>
+        </div>
+
+    </main>
+    <script>
+        function changeLanguage(lang) {
+            var elementsEn = document.querySelectorAll(".en");
+            var elementsIt = document.querySelectorAll(".it");
+            var buttonsEn = document.querySelectorAll(".en-btn");
+            var buttonsIt = document.querySelectorAll(".it-btn");
+
+
+            if (lang === 'en') {
+                italian = false;
+                elementsEn.forEach(function (el) {
+                    el.style.display = "block";
+                });
+                elementsIt.forEach(function (el) {
+                    el.style.display = "none";
+                });
+                buttonsEn.forEach(function (el) {
+                    el.style.display = "inline-block";
+                });
+                buttonsIt.forEach(function (el) {
+                    el.style.display = "none";
+                });
+
+                document.getElementById('italianButton').classList.remove('active');
+                document.getElementById('englishButton').classList.add('active');
+
+            } else {
+                italian = true;
+                elementsEn.forEach(function (el) {
+                    el.style.display = "none";
+                });
+                elementsIt.forEach(function (el) {
+                    el.style.display = "block";
+                });
+                buttonsEn.forEach(function (el) {
+                    el.style.display = "none";
+                });
+                buttonsIt.forEach(function (el) {
+                    el.style.display = "inline-block";
+                });
+                document.getElementById('italianButton').classList.add('active');
+                document.getElementById('englishButton').classList.remove('active');
+            }
+        }
+
+        //Function to pass the preferred language to other pages------------------------------------
+        function navigateToPage(page) {
+            const codedSelectedLang = encodeURIComponent(italian ? 'it' : 'en');
+            const urlDestination = page + "?testo=" + codedSelectedLang;
+            window.location.href = urlDestination;
+        }
+        document.getElementById('homeNav').addEventListener('click', function () {
+            navigateToPage("index.html");
+            event.preventDefault();
+        });
+        document.getElementById('prenotazioni').addEventListener('click', function () {
+            navigateToPage("modulo-clienti.html");
+            event.preventDefault();
+        });
+        document.getElementById('booking').addEventListener('click', function () {
+            navigateToPage("modulo-clienti.html");
+            event.preventDefault();
+        });
+
+        //receiving the preferred language from another page and decodifying it, then adapting the language buttons so that the button corresponding to the preferred language will appear active
+        // Function to retrieve language parameter from the URL
+        /*function getLanguageFromURL() {
+            const params = new URLSearchParams(window.location.search);
+            return params.get("testo");
+        }
+        // Function to set the active state for language buttons
+        function setActiveLanguage() {
+            const language = getLanguageFromURL();
+
+            if (language === 'en') {
+                document.getElementById('italianButton').classList.remove('active');
+                document.getElementById('englishButton').classList.add('active');
+                italian = false;
+                changeLanguage('en');
+            } else {
+                document.getElementById('italianButton').classList.add('active');
+                document.getElementById('englishButton').classList.remove('active');
+                italian = true;
+                changeLanguage('it');
+            }
+        }
+        // Call the function when the page loads
+        document.addEventListener('DOMContentLoaded', function () {
+            setActiveLanguage();
+        });*/
+
+        //Recieves the info from the modulo-clienti.html--------------------------------
+        var userInfo = document.getElementById("user-profile");
+        const params = new URLSearchParams(window.location.search);
+        const testoCodificato = params.get("testo");
+        console.log("Testo ricevuto: ");
+        // Decodifica il testo dalla URL
+        const testoDecodificato = decodeURIComponent(testoCodificato);
+
+        // Utilizza il contenuto del testo nella pagina 
+        if (testoDecodificato) {
+            userInfo.innerHTML = testoCodificato;
+            console.log("Testo ricevuto: " + testoDecodificato);
+        }
+
+        const langCodificato = params.get("lang");
+        const langDecodificato = decodeURIComponent(langCodificato);
+        console.log(langDecodificato);
+  
+        if (langDecodificato === 'en') {
+            italian = false;
+            changeLanguage('en');    
+        } else {
+            italian = true;
+            changeLanguage('it');
+        }
+
+    </script>
+</body>
+
+</html>
