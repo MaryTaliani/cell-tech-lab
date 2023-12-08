@@ -36,6 +36,8 @@
             padding-top: 0px;
             margin-top: -4px;
 
+        }
+
         .navbar a {
             color: white;
         }
@@ -45,6 +47,7 @@
             margin: 0px;
             padding: 0px;
         }
+
 
         .booking {
             text-align: center;
@@ -66,6 +69,24 @@
 
         .parts {
             padding-top: 70px;
+        }
+
+        .home-black-btn {
+            background-color: black;
+            color: white;
+            border: none;
+            padding: 15px 25px;
+            border-radius: 30px;
+            font-size: 1.1rem;
+        }
+
+        .home-black-btn:hover {
+            background-color: #284968;
+            color: white;
+            border: none;
+            padding: 15px 25px;
+            border-radius: 30px;
+            font-size: 1.1rem;
         }
 
         footer {
@@ -122,61 +143,6 @@
             padding: 10px 40px;
             font-size: 10px;
             align-items: center;
-        }
-
-        @media screen and (max-width:768px) {
-            .services {
-                width: 60%;
-            }
-
-            .choose-us {
-                padding: 70px 0px 0px;
-                display: block;
-                margin: 0px auto;
-            }
-
-            .choose-us-text {
-                width: 90%;
-                padding: 30px;
-            }
-
-            .choose-us-image {
-                text-align: center;
-            }
-        }
-
-        @media screen and (max-width:499px) {
-            .navbar {
-                display: block;
-                padding: 0px;
-            }
-
-            .navbar a {
-                display: block;
-                padding: 4px 0px;
-                margin-bottom: 2px;
-                background-color: darkgrey;
-            }
-
-            .services {
-                width: 70%;
-                border-radius: 20px;
-            }
-
-            .footers-container {
-                width: 100%;
-                flex-wrap: wrap;
-                box-sizing: border-box;
-            }
-
-            .footers {
-                width: 40%;
-                box-sizing: border-box;
-            }
-
-            .popup {
-                width: 60%;
-            }
         }
 
         /*PAGINA MODULO UTENTI-------------------------------------*/
@@ -321,6 +287,37 @@
             text-decoration: none;
             font-weight: 600;
         }
+
+        @media screen and (max-width:768px) {}
+
+        @media screen and (max-width:499px) {
+            .navbar {
+                display: block;
+                padding: 0px;
+            }
+
+            .navbar a {
+                display: block;
+                padding: 4px 0px;
+                margin-bottom: 2px;
+                background-color: darkgrey;
+            }
+
+            .footers-container {
+                width: 100%;
+                flex-wrap: wrap;
+                box-sizing: border-box;
+            }
+
+            .footers {
+                width: 40%;
+                box-sizing: border-box;
+            }
+
+            .popup {
+                width: 60%;
+            }
+        }
     </style>
 </head>
 
@@ -437,8 +434,8 @@
                     el.style.display = "none";
                 });
 
-                document.getElementById('username').placeholder="enter username";
-                document.getElementById('password').placeholder="enter password";
+                document.getElementById('username').placeholder = "enter username";
+                document.getElementById('password').placeholder = "enter password";
 
                 document.getElementById('italianButton').classList.remove('active');
                 document.getElementById('englishButton').classList.add('active');
@@ -458,8 +455,8 @@
                     el.style.display = "inline-block";
                 });
 
-                document.getElementById('username').placeholder="inserisci";
-                document.getElementById('password').placeholder="inserisci";
+                document.getElementById('username').placeholder = "inserisci";
+                document.getElementById('password').placeholder = "inserisci";
 
                 document.getElementById('italianButton').classList.add('active');
                 document.getElementById('englishButton').classList.remove('active');
