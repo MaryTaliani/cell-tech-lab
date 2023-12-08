@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -253,6 +253,10 @@
                 width: 40%;
                 box-sizing: border-box;
             }
+
+            .popup {
+                width: 60%;
+            }
         }
 
         /*PAGINA MODULO UTENTI-------------------------------------*/
@@ -285,47 +289,7 @@
         }
 
         /*PAGINA LOGIN-------------------------------------*/
-        .login-form-container {
-            margin: 0px auto 50px auto;
-            width: 60%;
-            background-color: #284968;
-            padding: 30px 50px;
-            width: 40% !important;
-        }
 
-        .dashboard {
-            max-width: 800px;
-            margin: 50px auto;
-            padding: 20px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-
-        #productList {
-            margin-top: 20px;
-        }
-
-        #searchInput {
-            width: 300px;
-            padding: 10px;
-            box-sizing: border-box;
-        }
-
-        #statusFilter {
-            padding: 10px;
-            box-sizing: border-box;
-        }
-
-        .product {
-            border: 1px solid #ddd;
-            padding: 10px;
-            margin-bottom: 10px;
-        }
-
-        .product:hover {
-            background-color: #f5f5f5;
-            cursor: pointer;
-        }
 
         .en {
             display: none;
@@ -553,6 +517,9 @@
                     el.style.display = "none";
                 });
 
+                document.getElementById('username').placeholder="enter username";
+                document.getElementById('password').placeholder="enter password";
+
                 document.getElementById('italianButton').classList.remove('active');
                 document.getElementById('englishButton').classList.add('active');
 
@@ -570,6 +537,10 @@
                 buttonsIt.forEach(function (el) {
                     el.style.display = "inline-block";
                 });
+
+                document.getElementById('username').placeholder="inserisci";
+                document.getElementById('password').placeholder="inserisci";
+
                 document.getElementById('italianButton').classList.add('active');
                 document.getElementById('englishButton').classList.remove('active');
             }
@@ -602,20 +573,20 @@
 
         // Function to set the active state for language buttons
         function setActiveLanguage() {
-                const language = getLanguageFromURL();
+            const language = getLanguageFromURL();
 
-                if (language === 'en') {
-                    document.getElementById('italianButton').classList.remove('active');
-                    document.getElementById('englishButton').classList.add('active');
-                    italian = false;
-                    changeLanguage('en');
-                } else {
-                    document.getElementById('italianButton').classList.add('active');
-                    document.getElementById('englishButton').classList.remove('active');
-                    italian = true;
-                    changeLanguage('it');
-                }
+            if (language === 'en') {
+                document.getElementById('italianButton').classList.remove('active');
+                document.getElementById('englishButton').classList.add('active');
+                italian = false;
+                changeLanguage('en');
+            } else {
+                document.getElementById('italianButton').classList.add('active');
+                document.getElementById('englishButton').classList.remove('active');
+                italian = true;
+                changeLanguage('it');
             }
+        }
         // Call the function when the page loads
         document.addEventListener('DOMContentLoaded', function () {
             setActiveLanguage();
