@@ -3,7 +3,7 @@ html {
     margin: 0px;
     height: 100%;
     font-family: Arial, Helvetica, sans-serif;
-    font-size: 1em;
+    font-size: 14px;
 }
 
 .navbar {
@@ -40,6 +40,47 @@ header img {
     width: 100%;
     margin: 0px;
     padding: 0px;
+}
+
+.en {
+    display: none;
+}
+
+.it {
+    display: block;
+}
+
+.en-btn {
+    display: none;
+}
+
+.it-btn {
+    display: inline-block;
+}
+
+.lang-btn {
+    background-color: rgb(230, 230, 230);
+    text-align: center;
+    padding: 5px 0px;
+    color: black !important;
+}
+
+.lang-btn button {
+    background-color: rgb(255, 255, 255);
+    font-size: 11px;
+    border: none;
+    border-radius: 8px;
+    padding: 3px 10px;
+}
+
+.lang-btn button.active {
+    background-color: rgb(160, 160, 160);
+    color: white;
+}
+
+.lang-btn button:hover {
+    background-color: rgb(160, 160, 160);
+    color: white;
 }
 
 .choose-us {
@@ -199,6 +240,40 @@ footer a {
     align-items: center;
 }
 
+.dashboard {
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+#productList {
+    margin-top: 20px;
+}
+
+#searchInput {
+    width: 300px;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+#statusFilter {
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.product {
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.product:hover {
+    background-color: #f5f5f5;
+    cursor: pointer;
+}
+
 @media screen and (max-width:768px) {
     .services {
         width: 60%;
@@ -262,13 +337,7 @@ label{
     color: darkgrey;
     font-size: 12px;
 }
-input{
-    margin: 3px 0px 10px 0px;
-    border-radius: 8px;
-    border: solid darkgrey 1px;
-    height: 20px;
-    width: 100%;
-}
+
 textarea{
     margin: 3px 0px 10px 0px;
     border-radius: 8px;
