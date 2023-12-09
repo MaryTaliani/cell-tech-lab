@@ -4,60 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    <link rel="stylesheet" href="style-index.css">
     <title>Modulo di Richiesta di Riparazione</title>
 
     <style>
-        .en {
-            display: none;
-        }
-
-        .it {
-            display: block;
-        }
-
-        .en-btn {
-            display: none;
-        }
-
-        .it-btn {
-            display: inline-block;
-        }
-
-        .lang-btn {
-            background-color: rgb(230, 230, 230);
-            text-align: center;
-            padding: 5px 0px;
-
-        }
-
-        .lang-btn button {
-            background-color: rgb(255, 255, 255);
-            color: black;
-            font-size: 11px;
-            border: none;
-            border-radius: 8px;
-            padding: 3px 10px;
-        }
-
-        .lang-btn button.active {
-            background-color: rgb(160, 160, 160);
-            color: white;
-        }
-
-        .lang-btn button:hover {
-            background-color: rgb(160, 160, 160);
-            color: white;
-        }
-
-        body,
-        html {
-            margin: 0px;
-            height: 100%;
-            font-family: Arial, Helvetica, sans-serif;
-            font-size: 1em;
-        }
-
         .info-device {
             width: 60%;
             border-radius: 20px;
@@ -65,116 +15,7 @@
             margin: 20px auto;
             padding: 20px 30px;
             box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
-        }
-
-        .navbar {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            max-width: 70%;
-            margin: 0 auto;
-            padding: 20px 0px;
-        }
-
-        .navbar a {
-            text-decoration: none;
-            text-align: center;
-            padding-right: 3%;
-            padding-left: 3%;
-        }
-
-        .nav {
-            background-color: rgb(160, 160, 160);
-            padding-top: 0px;
-            margin-top: -4px;
-        }
-
-        .navbar a {
-            color: white;
-        }
-
-        header img {
-            width: 100%;
-            margin: 0px;
-            padding: 0px;
-        }
-
-        footer {
-            background-color: #284968;
-            background: linear-gradient(to bottom, #284968, #43698d);
-            padding: 30px 10px 10px;
-        }
-
-        .footers-container {
-            width: 80%;
-            text-align: center;
-            display: flex;
-            justify-content: space-around;
-            justify-content: center;
-            margin: 0px auto;
-        }
-
-        footer p {
-            color: rgb(205, 205, 205);
-            font-size: 13px;
-            margin: 5px 0px;
-            font-size: 10px;
-            padding-left: 0px;
-
-        }
-
-        footer a {
-            text-decoration: none;
-            color: darkgray;
-            font-size: 10px;
-            font-weight: bold;
-            color: white;
-        }
-
-        .icons-text {
-            display: inline-block;
-            position: relative;
-
-        }
-
-        .svg-icon {
-            display: block;
-            margin-bottom: 2px;
-            text-align: center;
-            /*vertical-align:top;*/
-        }
-
-        .footers {
-            padding: 10px 2%;
-            line-height: 0.9em;
-
-
-        }
-
-        .lastPart {
-            color: darkgrey;
-            background-color: black;
-            padding: 10px 40px;
-            font-size: 10px;
-            align-items: center;
-        }
-
-        @media screen and (max-width:499px) {
-            .navbar {
-                display: block;
-                padding: 0px;
-            }
-
-            .navbar a {
-                display: block;
-                padding: 4px 0px;
-                margin-bottom: 2px;
-                background-color: darkgrey;
-            }
-
-            footer {
-                flex-wrap: wrap;
-            }
+            background-color: white;
         }
 
         body {
@@ -230,6 +71,18 @@
         button:hover {
             background-color: #284968;
         }
+
+        .lang-btn button {
+            color: black !important;
+        }
+
+        .lang-btn button:hover {
+            color: white !important;
+        }
+
+        .lang-btn button.active {
+            color: white !important;
+        }
     </style>
 
 </head>
@@ -255,38 +108,34 @@
             <button id="englishButton" onclick="changeLanguage('en')">English</button>
         </div>
 
-        <form class="it">
+        <form>
             <label for="descrizioneProdotto" class="it">Descrizione del Prodotto:</label>
-            <textarea id="descrizioneProdotto" name="descrizioneProdotto" class="it" required></textarea>
+            <label for="descrizioneProdotto" class="en">Product description:</label>
+            <textarea id="descrizioneProdotto" name="descrizioneProdotto" required></textarea>
+
             <label for="numeroSerie" class="it">Numero di Serie:</label>
-            <input type="text" id="numeroSerie" name="numeroSerie" class="it" required>
+            <label for="numeroSerie" class="en">Serial Number:</label>
+            <input type="text" id="numeroSerie" name="numeroSerie" required>
+
             <label for="dettagliRiparazione" class="it">Dettagli sulla Riparazione:</label>
-            <textarea id="dettagliRiparazione" name="dettagliRiparazione" class="it" required></textarea>
+            <label for="dettagliRiparazione" class="en">Repair details:</label>
+            <textarea id="dettagliRiparazione" name="dettagliRiparazione" required></textarea>
+
             <label for="dataRiparazione" class="it">Data:</label>
-            <input type="date" id="dataRiparazione" name="dataRiparazione" class="it" required>
+            <label for="dataRiparazione" class="en">Date:</label>
+            <input type="date" id="dataRiparazione" name="dataRiparazione" required>
+
             <label for="oraRiparazione" class="it">Ora:</label>
-            <input type="time" id="oraRiparazione" name="oraRiparazione" class="it" required>
+            <label for="oraRiparazione" class="en">Time:</label>
+            <input type="time" id="oraRiparazione" name="oraRiparazione" required>
 
-            <button onclick="inviaRichiesta('it')" class="it-btn">Registra Dispositivo</button>
-        </form>
-        <form class="en">
-            <label for="descrizioneProdotto-en" class="en">Product description:</label>
-            <textarea id="descrizioneProdotto-en" name="descrizioneProdotto-en" class="en" required></textarea>
-            <label for="numeroSerie-en" class="en">Serial Number:</label>
-            <input type="text" id="numeroSerie-en" name="numeroSerie-en" class="en" required>
-            <label for="dettagliRiparazione-en" class="en">Repair details:</label>
-            <textarea id="dettagliRiparazione-en" name="dettagliRiparazione-en" class="en" required></textarea>
-            <label for="dataRiparazione-en" class="en">Date:</label>
-            <input type="date" id="dataRiparazione-en" name="dataRiparazione-en:" class="en" required>
-            <label for="oraRiparazione-en" class="en">Time:</label>
-            <input type="time" id="oraRiparazione-en" name="oraRiparazione-en" class="en" required>
-
-            <button onclick="inviaRichiesta('en')" class="en-btn">Register Device</button>
+            <button onclick="inviaRichiesta()" class="it-btn">Registra Dispositivo</button>
+            <button onclick="inviaRichiesta()" class="en-btn">Register Device</button>
         </form>
 
-        <div class="info-device">
+        <div id="info-device">
 
-            <p id="info-device"></p>
+            
         </div>
     </main>
 
@@ -371,52 +220,40 @@
     </div>
     <script>
         var italian = true;
-        function inviaRichiesta(language) {
-            var device = document.getElementById("info-device");
-            switch (language) {
-                case 'it':
-                    var descrizioneProdotto = document.getElementById("descrizioneProdotto").value;
-                    var numeroSerie = document.getElementById("numeroSerie").value;
-                    var dettagliRiparazione = document.getElementById("dettagliRiparazione").value;
-                    var dataRiparazione = document.getElementById("dataRiparazione").value;
-                    var oraRiparazione = document.getElementById("oraRiparazione").value;
-                    if (descrizioneProdotto === "" || numeroSerie === "" || dettagliRiparazione === "" || dataRiparazione === "" || oraRiparazione === "") {
-                        alert("Si prega di compilare tutti i campi obbligatori.");
-                        return false;
-                    }
-                    event.preventDefault();
-                    device.innerHTML = "<br>descrizione prodotto:" + descrizioneProdotto + "<br>numero serie:" + numeroSerie + "<br>dettagli riparazione:" + dettagliRiparazione + "<br>data riparazione:" + dataRiparazione + "<br>ora riparazione:" + oraRiparazione;
-                    document.getElementById("descrizioneProdotto").value = "";
-                    document.getElementById("numeroSerie").value = "";
-                    document.getElementById("dettagliRiparazione").value = "";
-                    document.getElementById("dataRiparazione").value = "";
-                    document.getElementById("oraRiparazione-en").value = "";
-                    break;
-
-                case 'en':
-                    var descrizioneProdottoEn = document.getElementById("descrizioneProdotto-en").value;
-                    var numeroSerieEn = document.getElementById("numeroSerie-en").value;
-                    var dettagliRiparazioneEn = document.getElementById("dettagliRiparazione-en").value;
-                    var dataRiparazioneEn = document.getElementById("dataRiparazione-en").value;
-                    var oraRiparazioneEn = document.getElementById("oraRiparazione-en").value;
-                    if (descrizioneProdottoEn === "" || numeroSerieEn === "" || dettagliRiparazioneEn === "" || dataRiparazioneEn === "" || oraRiparazioneEn === "") {
-                        alert("Please fill all the mandatory fields in.");
-                        return false;
-                    }
-                    event.preventDefault();
-                    device.innerHTML = "<br>Product description:" + descrizioneProdottoEn + "<br>Serial number:" + numeroSerieEn + "<br>Repair details:" + dettagliRiparazioneEn + "<br>Repaire date:" + dataRiparazioneEn + "<br>Repair hour:" + oraRiparazioneEn;
-                    document.getElementById("descrizioneProdotto-en").value = "";
-                    document.getElementById("numeroSerie-en").value = "";
-                    document.getElementById("dettagliRiparazione-en").value = "";
-                    document.getElementById("dataRiparazione-en").value = "";
-                    document.getElementById("oraRiparazione-en").value = "";
-                    break;
-
-                default:
-                    break;
-
+        var device;
+        function inviaRichiesta() {
+            device = document.getElementById("info-device");
+            var descrizioneProdotto = document.getElementById("descrizioneProdotto").value;
+            var numeroSerie = document.getElementById("numeroSerie").value;
+            var dettagliRiparazione = document.getElementById("dettagliRiparazione").value;
+            var dataRiparazione = document.getElementById("dataRiparazione").value;
+            var oraRiparazione = document.getElementById("oraRiparazione").value;
+            if (italian) {
+                if (descrizioneProdotto === "" || numeroSerie === "" || dettagliRiparazione === "" || dataRiparazione === "" || oraRiparazione === "") {
+                    alert("Si prega di compilare tutti i campi obbligatori.");
+                    return false;
+                }
+            }else {
+                if (descrizioneProdotto === "" || numeroSerie === "" || dettagliRiparazione === "" || dataRiparazione === "" || oraRiparazione === "") {
+                    alert("Please fill all the mandatory fields in.");
+                    return false;
+                }  
+            }
+            event.preventDefault();
+            device.classList.add('info-device');
+            device.innerHTML = "<p class='it'>" +"<strong>descrizione prodotto: </strong>" + descrizioneProdotto + "<br><strong>numero serie: </strong>" + numeroSerie + "<br><strong>dettagli riparazione: </strong>" + dettagliRiparazione + "<br><strong>data riparazione:</strong> " + dataRiparazione + "<br><strong>ora riparazione:</strong> " + oraRiparazione + "</p>" + "<p class='en'>" + "<strong>Product description:</strong> " + descrizioneProdotto + "<br><strong>Serial number:</strong> " + numeroSerie + "<br><strong>Repair details:</strong> " + dettagliRiparazione + "<br><strong>Repaire date:</strong> " + dataRiparazione + "<br><strong>Repair hour:</strong> " + oraRiparazione + "</p";
+            document.getElementById("descrizioneProdotto").value = "";
+            document.getElementById("numeroSerie").value = "";
+            document.getElementById("dettagliRiparazione").value = "";
+            document.getElementById("dataRiparazione").value = "";
+            document.getElementById("oraRiparazione").value = "";
+            if(italian){
+                changeLanguage('it');
+            } else{
+                changeLanguage('en');
             }
 
+            
         }
 
         function changeLanguage(lang) {
@@ -443,6 +280,7 @@
 
                 document.getElementById('italianButton').classList.remove('active');
                 document.getElementById('englishButton').classList.add('active');
+                
 
             } else {
                 italian = true;
@@ -460,6 +298,8 @@
                 });
                 document.getElementById('italianButton').classList.add('active');
                 document.getElementById('englishButton').classList.remove('active');
+
+
             }
 
         }
@@ -491,20 +331,20 @@
 
         // Function to set the active state for language buttons
         function setActiveLanguage() {
-                const language = getLanguageFromURL();
+            const language = getLanguageFromURL();
 
-                if (language === 'en') {
-                    document.getElementById('italianButton').classList.remove('active');
-                    document.getElementById('englishButton').classList.add('active');
-                    italian = false;
-                    changeLanguage('en');
-                } else {
-                    document.getElementById('italianButton').classList.add('active');
-                    document.getElementById('englishButton').classList.remove('active');
-                    italian = true;
-                    changeLanguage('it');
-                }
+            if (language === 'en') {
+                document.getElementById('italianButton').classList.remove('active');
+                document.getElementById('englishButton').classList.add('active');
+                italian = false;
+                changeLanguage('en');
+            } else {
+                document.getElementById('italianButton').classList.add('active');
+                document.getElementById('englishButton').classList.remove('active');
+                italian = true;
+                changeLanguage('it');
             }
+        }
         // Call the function when the page loads
         document.addEventListener('DOMContentLoaded', function () {
             setActiveLanguage();
