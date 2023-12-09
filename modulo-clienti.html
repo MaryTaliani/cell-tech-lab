@@ -6,48 +6,20 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!--sito responsive-->
     <meta name="author" content="Team 2" /> <!-- autore pagina-->
-
+    <link rel="stylesheet" href="style-index.css">
     <title>Modulo clienti</title>
     <style>
-        .en {
-            display: none;
-        }
-
-        .it {
-            display: block;
-        }
-
-        .lang-btn {
-            background-color: rgb(230, 230, 230);
-            text-align: center;
-            padding: 5px 0px;
-
-        }
-
-        .lang-btn button {
-            background-color: rgb(255, 255, 255);
-            color: black;
-            font-size: 10px;
-            border: none;
-            border-radius: 8px;
-            padding: 3px 10px;
-        }
-
-        .lang-btn button.active {
-            background-color: rgb(160, 160, 160);
-            color: white;
+       .lang-btn button {
+            color: black !important;
         }
 
         .lang-btn button:hover {
-            background-color: rgb(160, 160, 160);
-            color: white;
-            font-size: 10px;
-            border: none;
-            border-radius: 8px;
-            padding: 3px 10px;
+            color: white !important;
         }
 
-
+        .lang-btn button.active {
+            color: white !important;
+        }
         h1 {
             color: red;
             font-size: 30px;
@@ -70,112 +42,9 @@
             background-color: blue;
         }
 
-        body,
-        html {
-            margin: 0px;
-            height: 100%;
-            font-family: Arial, Helvetica, sans-serif;
-            font-size: 0.9em;
-        }
-
-        main {
-            margin: 0px auto;
-
-        }
-
-        .navbar {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            max-width: 70%;
-            margin: 0 auto;
-            padding: 20px 0px;
-        }
-
-        .navbar a {
-            text-decoration: none;
-            text-align: center;
-            padding-right: 3%;
-            padding-left: 3%;
-        }
-
-        .nav {
-            background-color: rgb(160, 160, 160);
-            padding-top: 0px;
-            margin-top: -4px;
-        }
-
-        .navbar a {
-            color: white;
-        }
-
-        header img {
-            width: 100%;
-            margin: 0px;
-            padding: 0px;
-        }
-
-        footer {
-            background-color: #284968;
-            background: linear-gradient(to bottom, #284968, #43698d);
-            padding: 30px 10px 10px;
-        }
-
-        .footers-container {
-            width: 80%;
-            text-align: center;
-            display: flex;
-            justify-content: space-around;
-            justify-content: center;
-            margin: 0px auto;
-        }
-
-        footer p {
-            color: rgb(205, 205, 205);
-            font-size: 13px;
-            margin: 5px 0px;
-            font-size: 10px;
-            padding-left: 0px;
-
-        }
-
-        footer a {
-            text-decoration: none;
-            color: darkgray;
-            font-size: 10px;
-            font-weight: bold;
-            color: white;
-        }
-        .icons-text {
-            display: inline-block;
-            position: relative;
-
-        }
-
-        .svg-icon {
-            display: block;
-            margin-bottom: 2px;
-            text-align: center;
-            /*vertical-align:top;*/
-        }
-
-        .footers {
-            padding: 10px 2%;
-            line-height: 0.9em;
-
-
-        }
-
-        .lastPart {
-            color: darkgrey;
-            background-color: black;
-            padding: 10px 40px;
-            font-size: 10px;
-            align-items: center;
-        }
-
         label {
             text-align: left;
+            color: black !important;
 
         }
         input{
@@ -194,21 +63,6 @@
         }
 
         @media screen and (max-width:499px) {
-            .navbar {
-                display: block;
-                padding: 0px;
-            }
-
-            .navbar a {
-                display: block;
-                padding: 4px 0px;
-                margin-bottom: 2px;
-                background-color: darkgrey;
-            }
-
-            footer {
-                flex-wrap: wrap;
-            }
 
             .module {
                     width: 60%;
